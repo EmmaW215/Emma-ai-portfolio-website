@@ -10,7 +10,7 @@ const aiSystemProjects = [
     subtitle: "AI Career Intelligence Platform",
     description:
       "An intelligent career guidance platform powered by AI that analyzes career trajectories, provides personalized recommendations, and helps professionals make data-driven decisions about their career paths using advanced LLM reasoning.",
-    tags: ["AI/ML", "LLM", "Career Intelligence", "Python", "Next.js"],
+    tags: ["AI/ML", "LLM", "Career Intelligence", "Agentic AI", "Multi-Batch-RAG", "Python", "Next.js"],
     github: "https://github.com/EmmaW215/SmartSccuss_Career_Intelligence_AI",
     demo: "https://smart-sccuss-career-intelligence-ai.vercel.app/",
     icon: "cpu" as const,
