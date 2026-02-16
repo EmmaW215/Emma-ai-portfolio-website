@@ -14,13 +14,20 @@ const SENTENCES = [
   "Welcome to my personal AI website.",
   "Please feel free to click, and to explore and discover my projects.",
 ]
+const TITLE_LINES = [
+  "Digital Mind Studio",
+  "Emma's AI ProtoVerse",
+  "From Vision to Intelligence",
+]
 
 export function HeroSection({ phase, onStart, onVoiceDone }: HeroSectionProps) {
   const [showContent, setShowContent] = useState(false)
   const [showButton, setShowButton] = useState(false)
   const [currentSentence, setCurrentSentence] = useState(0)
   const [showSubtitle, setShowSubtitle] = useState(false)
-  const [hasAutoPlayed, setHasAutoPlayed] = useState(false)
+  const [typedLines, setTypedLines] = useState<string[]>(["", "", ""])
+  const [typewriterDone, setTypewriterDone] = useState(false)
+  const [activeLine, setActiveLine] = useState(-1)
 
   const onVoiceDoneRef = useRef(onVoiceDone)
   onVoiceDoneRef.current = onVoiceDone
@@ -28,6 +35,7 @@ export function HeroSection({ phase, onStart, onVoiceDone }: HeroSectionProps) {
   onStartRef.current = onStart
   const sentenceTimerRef = useRef<ReturnType<typeof setTimeout>>()
   const fallbackTimerRef = useRef<ReturnType<typeof setTimeout>>()
+  const audioCtxRef = useRef<AudioContext | null>(null)
 
   // Preload speech synthesis voices
   useEffect(() => {
@@ -50,6 +58,74 @@ export function HeroSection({ phase, onStart, onVoiceDone }: HeroSectionProps) {
     }
   }, [])
 
+  // Typewriter key click sound via Web Audio API
+  const playKeyClick = useCallback(() => {
+    try {
+      if (!audioCtxRef.current) {
+        audioCtxRef.current = new AudioContext()
+      }
+      const ctx = audioCtxRef.current
+      if (ctx.state === "suspended") ctx.resume()
+      const osc = ctx.createOscillator()
+      const gain = ctx.createGain()
+      osc.type = "square"
+      osc.frequency.setValueAtTime(600 + Math.random() * 600, ctx.currentTime)
+      gain.gain.setValueAtTime(0.015, ctx.currentTime)
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04)
+      osc.connect(gain)
+      gain.connect(ctx.destination)
+      osc.start(ctx.currentTime)
+      osc.stop(ctx.currentTime + 0.04)
+    } catch {
+      // Silently fail if Web Audio API is not available
+    }
+  }, [])
+
+  // Typewriter effect for the three title lines
+  useEffect(() => {
+    if (!showContent) return
+
+    let lineIdx = 0
+    let charIdx = 0
+    let pauseCounter = 0
+    const PAUSE_TICKS = 5
+
+    setActiveLine(0)
+
+    const interval = setInterval(() => {
+      if (pauseCounter > 0) {
+        pauseCounter--
+        return
+      }
+
+      if (lineIdx >= TITLE_LINES.length) {
+        clearInterval(interval)
+        setTypewriterDone(true)
+        setActiveLine(-1)
+        return
+      }
+
+      const line = TITLE_LINES[lineIdx]
+      if (charIdx < line.length) {
+        const nextChar = charIdx + 1
+        setTypedLines(prev => {
+          const next = [...prev]
+          next[lineIdx] = line.slice(0, nextChar)
+          return next
+        })
+        playKeyClick()
+        charIdx++
+      } else {
+        lineIdx++
+        charIdx = 0
+        pauseCounter = PAUSE_TICKS
+        setActiveLine(lineIdx < TITLE_LINES.length ? lineIdx : -1)
+      }
+    }, 70)
+
+    return () => clearInterval(interval)
+  }, [showContent, playKeyClick])
+
   // Cleanup on unmount
   useEffect(() => {
     return () => {
@@ -58,6 +134,7 @@ export function HeroSection({ phase, onStart, onVoiceDone }: HeroSectionProps) {
       }
       if (sentenceTimerRef.current) clearTimeout(sentenceTimerRef.current)
       if (fallbackTimerRef.current) clearTimeout(fallbackTimerRef.current)
+      if (audioCtxRef.current) audioCtxRef.current.close().catch(() => {})
     }
   }, [])
 
@@ -115,16 +192,6 @@ export function HeroSection({ phase, onStart, onVoiceDone }: HeroSectionProps) {
     onStartRef.current()
   }, [])
 
-  // Auto-play on first mount after a brief delay
-  useEffect(() => {
-    if (hasAutoPlayed) return
-    const timer = setTimeout(() => {
-      setHasAutoPlayed(true)
-      startPlayback()
-    }, 1500)
-    return () => clearTimeout(timer)
-  }, [hasAutoPlayed, startPlayback])
-
   // When phase resets to "waiting" (after a re-click cycle), hide subtitles
   useEffect(() => {
     if (phase === "waiting") {
@@ -176,16 +243,19 @@ export function HeroSection({ phase, onStart, onVoiceDone }: HeroSectionProps) {
               : "opacity-0 translate-y-8"
           }`}
         >
-          <p className="text-accent font-heading text-base md:text-lg tracking-[0.3em] uppercase mb-4 font-bold">
-            Digital Mind Studio
+          <p className="text-accent font-heading text-base md:text-lg tracking-[0.3em] uppercase mb-4 font-bold min-h-[1.75em]">
+            {typedLines[0]}
+            {activeLine === 0 && <span className="animate-pulse">|</span>}
           </p>
-          <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-foreground mb-4 text-balance">
-            {"Emma's AI ProtoVerse"}
+          <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-foreground mb-4 text-balance min-h-[1.25em]">
+            {typedLines[1]}
+            {activeLine === 1 && <span className="animate-pulse text-accent">|</span>}
           </h1>
-          <p className="text-muted-foreground text-lg lg:text-xl leading-relaxed max-w-md">
-            From Vision to Intelligence
+          <p className="text-muted-foreground text-lg lg:text-xl leading-relaxed max-w-md min-h-[1.75em]">
+            {typedLines[2]}
+            {activeLine === 2 && <span className="animate-pulse text-accent">|</span>}
           </p>
-          <div className="mt-6 flex items-center gap-3">
+          <div className={`mt-6 flex items-center gap-3 transition-opacity duration-500 ${typewriterDone ? "opacity-100" : "opacity-0"}`}>
             <div className="h-px w-12 bg-accent/60" />
             <div className="h-1.5 w-1.5 rounded-full bg-accent" />
             <div className="h-px w-24 bg-border" />
