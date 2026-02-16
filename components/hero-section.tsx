@@ -58,6 +58,28 @@ export function HeroSection({ phase, onStart, onVoiceDone }: HeroSectionProps) {
     }
   }, [])
 
+  // Resume AudioContext on first user interaction (unlocks audio autoplay restriction)
+  useEffect(() => {
+    const resumeAudio = () => {
+      if (audioCtxRef.current && audioCtxRef.current.state === "suspended") {
+        audioCtxRef.current.resume()
+      }
+      document.removeEventListener("click", resumeAudio)
+      document.removeEventListener("touchstart", resumeAudio)
+      document.removeEventListener("keydown", resumeAudio)
+    }
+
+    document.addEventListener("click", resumeAudio)
+    document.addEventListener("touchstart", resumeAudio)
+    document.addEventListener("keydown", resumeAudio)
+
+    return () => {
+      document.removeEventListener("click", resumeAudio)
+      document.removeEventListener("touchstart", resumeAudio)
+      document.removeEventListener("keydown", resumeAudio)
+    }
+  }, [])
+
   // Typewriter key click sound via Web Audio API
   const playKeyClick = useCallback(() => {
     try {
