@@ -30,11 +30,11 @@ export function ProjectCard({ project }: { project: Project }) {
         onClick={() => setIsExpanded(true)}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="group relative w-full text-left rounded-xl border border-border/50 bg-card/40 backdrop-blur-sm p-6 transition-all duration-500 hover:border-accent/30 hover:bg-card/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        className="group relative z-40 w-full text-left rounded-xl border border-border/50 bg-card/40 backdrop-blur-sm p-6 transition-all duration-500 hover:border-accent/30 hover:bg-card/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent animate-float"
         style={{
           boxShadow: isHovered
             ? "0 0 30px rgba(220, 38, 38, 0.08), 0 8px 32px rgba(0, 0, 0, 0.12)"
-            : "0 2px 8px rgba(0, 0, 0, 0.06)",
+            : "0 4px 20px rgba(0, 0, 0, 0.12), 0 1px 6px rgba(0, 0, 0, 0.08)",
         }}
         aria-label={`View details for ${project.title}`}
       >
