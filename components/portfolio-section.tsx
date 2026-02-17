@@ -125,7 +125,7 @@ export function PortfolioSection({ isRevealed }: { isRevealed: boolean }) {
   return (
     <section
       id="portfolio"
-      className={`relative z-30 transition-opacity duration-1000 ${
+      className={`relative z-10 transition-opacity duration-1000 ${
         isRevealed ? "opacity-100" : "opacity-0"
       }`}
       aria-label="Portfolio projects"

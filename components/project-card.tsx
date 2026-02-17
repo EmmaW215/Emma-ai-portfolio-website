@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { createPortal } from "react-dom"
 import { ExternalLink, Github, X, ChevronRight, Cpu, Layers, Sparkles } from "lucide-react"
 
 interface Project {
@@ -30,11 +31,11 @@ export function ProjectCard({ project }: { project: Project }) {
         onClick={() => setIsExpanded(true)}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="group relative z-40 w-full text-left rounded-xl border border-border/50 bg-card/40 backdrop-blur-sm p-6 transition-all duration-500 hover:border-accent/30 hover:bg-card/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent animate-float"
+        className="group relative w-full text-left rounded-xl border border-border/50 bg-card/40 backdrop-blur-sm p-6 transition-all duration-500 hover:border-accent/30 hover:bg-card/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         style={{
           boxShadow: isHovered
             ? "0 0 30px rgba(220, 38, 38, 0.08), 0 8px 32px rgba(0, 0, 0, 0.12)"
-            : "0 4px 20px rgba(0, 0, 0, 0.12), 0 1px 6px rgba(0, 0, 0, 0.08)",
+            : "0 2px 8px rgba(0, 0, 0, 0.06)",
         }}
         aria-label={`View details for ${project.title}`}
       >
@@ -75,8 +76,8 @@ export function ProjectCard({ project }: { project: Project }) {
         </div>
       </button>
 
-      {/* Expanded Modal */}
-      {isExpanded && (
+      {/* Expanded Modal - rendered via Portal to escape stacking context */}
+      {isExpanded && createPortal(
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4"
           role="dialog"
@@ -91,7 +92,7 @@ export function ProjectCard({ project }: { project: Project }) {
           />
 
           {/* Modal content */}
-          <div className="relative w-full max-w-lg bg-card border border-border/50 rounded-2xl shadow-2xl animate-fade-in-up overflow-hidden">
+          <div className="relative w-full max-w-lg bg-card border border-border/50 rounded-2xl shadow-2xl animate-fade-in-up animate-float-gentle overflow-hidden">
             {/* Header accent line */}
             <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/50 to-transparent" aria-hidden="true" />
 
@@ -157,7 +158,8 @@ export function ProjectCard({ project }: { project: Project }) {
             {/* Bottom accent line */}
             <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/30 to-transparent" aria-hidden="true" />
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   )
