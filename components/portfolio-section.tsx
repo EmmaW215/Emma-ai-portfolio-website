@@ -32,7 +32,7 @@ const aiSystemProjects = [
       "A modular framework for building Retrieval-Augmented Generation pipelines and fine-tuning Large Language Models for academic research. Features customizable RAG components, evaluation metrics, and deployment-ready fine-tuning workflows.",
     tags: ["RAG", "LLM Fine-Tuning", "Research", "Modular Architecture"],
     github: "https://github.com/EmmaW215/Academic-LLM-Fine-Tuning-System",
-    demo: "https://academic-llm-fine-tuning-system.vercel.app/",
+    demo: "https://github.com/EmmaW215/Academic-LLM-Fine-Tuning-System",
     icon: "layers" as const,
   },
 ]
