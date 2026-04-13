@@ -88,8 +88,11 @@ body {
   * {
     @apply border-border;
   }
+  html,
   body {
     @apply bg-background text-foreground;
+    height: 100%;
+    overflow: hidden;
   }
 }
 
@@ -103,9 +106,10 @@ body {
   }
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar (vertical + horizontal) */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: hsl(var(--background));

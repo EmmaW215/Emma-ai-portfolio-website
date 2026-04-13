@@ -140,8 +140,7 @@ export function NeuralParticles() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none"
-      style={{ zIndex: 0 }}
+      className="pointer-events-none fixed inset-0 z-[2]"
       aria-hidden="true"
     />
   )
