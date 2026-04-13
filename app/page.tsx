@@ -118,7 +118,7 @@ export default function Page() {
 
           <div
             ref={portfolioRef}
-            className="relative h-full w-screen shrink-0 overflow-x-hidden overflow-y-auto bg-background/80 backdrop-blur-md"
+            className="relative h-full w-screen shrink-0 overflow-x-hidden overflow-y-auto bg-background/60 backdrop-blur-md"
           >
             <PortfolioSection isRevealed={hasPlayedOnce} />
             <Footer />
