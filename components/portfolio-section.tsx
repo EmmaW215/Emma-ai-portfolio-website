@@ -55,6 +55,7 @@ const innovationProjects = [
       "A community-focused platform that helps users discover and connect with local recreational programs and drop-in activities. Features intelligent search, filtering, and recommendation systems to match users with relevant community offerings.",
     tags: ["Community Platform", "Search System", "Full-Stack", "UX Design"],
     github: "https://github.com/EmmaW215/obm-recfind-dropin",
+    demo: "https://obm-recfind-dropin.vercel.app/",
     icon: "cpu" as const,
   },
 ]
