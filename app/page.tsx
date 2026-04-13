@@ -94,7 +94,7 @@ export default function Page() {
       {/* Body already provides bg-background; Spline sits above it once loaded */}
       <SiteSplineBackground />
       <div
-        className="pointer-events-none fixed inset-0 z-[1] bg-background/15"
+        className="pointer-events-none fixed inset-0 z-[1] bg-background/8"
         aria-hidden
       />
       <NeuralParticles />

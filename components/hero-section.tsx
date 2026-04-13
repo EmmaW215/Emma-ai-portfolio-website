@@ -234,7 +234,7 @@ export function HeroSection({ phase, onStart, onVoiceDone }: HeroSectionProps) {
       aria-label="Hero introduction"
     >
       {/* Metallic gradient overlay — partly transparent so the global Spline background can read through */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background/88 via-background/72 to-secondary/35" />
+      <div className="absolute inset-0 bg-gradient-to-br from-background/72 via-background/55 to-secondary/32" />
 
       {/* Subtle grid pattern */}
       <div

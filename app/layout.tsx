@@ -11,6 +11,10 @@ const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space
 export const metadata: Metadata = {
   title: "Emma's AI ProtoVerse | From Vision to Intelligence",
   description: 'My Digital Mind Studio - A futuristic personal AI portfolio showcasing intelligent systems and innovation platforms.',
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    shortcut: "/favicon.svg",
+  },
 }
 
 export const viewport: Viewport = {
