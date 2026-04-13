@@ -5,7 +5,7 @@ import { Github, Linkedin, Mail } from "lucide-react"
 export function Footer() {
   return (
     <footer className="relative z-10 border-t border-border/30" role="contentinfo">
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12">
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-6 sm:py-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <p className="font-heading text-lg font-semibold text-foreground">
@@ -45,7 +45,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-border/20 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-6 pt-5 border-t border-border/20 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-muted-foreground text-xs">
             {"Designed & built by Emma \u00B7 Powered by Next.js & AI"}
           </p>

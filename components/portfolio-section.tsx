@@ -71,8 +71,8 @@ function SectionHeader({
   title: string
 }) {
   return (
-    <div className="mb-10">
-      <div className="flex items-center gap-3 mb-4">
+    <div className="mb-5">
+      <div className="flex items-center gap-3 mb-3">
         <div className="p-2 rounded-lg bg-accent/10 border border-accent/20 text-accent">
           <Icon className="w-5 h-5" />
         </div>
@@ -80,10 +80,10 @@ function SectionHeader({
           {label}
         </span>
       </div>
-      <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground text-balance">
+      <h2 className="font-heading text-xl md:text-2xl font-bold text-foreground text-balance leading-snug">
         {title}
       </h2>
-      <div className="mt-4 flex items-center gap-2">
+      <div className="mt-3 flex items-center gap-2">
         <div className="h-px w-16 bg-accent/40" />
         <div className="h-1 w-1 rounded-full bg-accent/60" />
         <div className="h-px flex-1 bg-border/50" />
@@ -132,7 +132,7 @@ export function PortfolioSection({ isRevealed }: { isRevealed: boolean }) {
       }`}
       aria-label="Portfolio projects"
     >
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-24">
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-6 sm:py-7">
         {/* Section 1: AI System Architecture */}
         <AnimatedSection>
           <SectionHeader
@@ -142,7 +142,7 @@ export function PortfolioSection({ isRevealed }: { isRevealed: boolean }) {
           />
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-7">
           {aiSystemProjects.map((project, i) => (
             <AnimatedSection key={project.title} delay={i * 150}>
               <ProjectCard project={project} />
@@ -159,7 +159,7 @@ export function PortfolioSection({ isRevealed }: { isRevealed: boolean }) {
           />
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
           {innovationProjects.map((project, i) => (
             <AnimatedSection key={project.title} delay={i * 150}>
               <ProjectCard project={project} />
