@@ -83,9 +83,9 @@ export function AvatarOverlay({ phase, onVideoCycleEnd }: AvatarOverlayProps) {
           className="h-full w-full object-cover object-top"
           style={{
             WebkitMaskImage:
-              "radial-gradient(ellipse 72% 64% at 63% 38%, #fff 64%, rgba(255,255,255,0.4) 66%, rgba(255,255,255,0.06) 72%, rgba(255,255,255,0) 100%)",
+              "radial-gradient(ellipse 46% 44% at 55% 28%, #fff 55%, rgba(255,255,255,0.4) 78%, rgba(255,255,255,0.06) 92%, rgba(255,255,255,0) 100%)",
             maskImage:
-              "radial-gradient(ellipse 72% 64% at 63% 38%, #fff 64%, rgba(255,255,255,0.4) 66%, rgba(255,255,255,0.06) 72%, rgba(255,255,255,0) 100%)",
+              "radial-gradient(ellipse 46% 44% at 55% 28%, #fff 55%, rgba(255,255,255,0.4) 78%, rgba(255,255,255,0.06) 92%, rgba(255,255,255,0) 100%)",
             WebkitMaskSize: "100% 100%",
             maskSize: "100% 100%",
             WebkitMaskRepeat: "no-repeat",
