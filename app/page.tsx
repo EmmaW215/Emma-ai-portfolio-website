@@ -1,17 +1,13 @@
 "use client"
 
 import { useState, useRef, useCallback, useEffect } from "react"
-import dynamic from "next/dynamic"
 import { NeuralParticles } from "@/components/neural-particles"
+import SiteSplineBackground from "@/components/site-spline-background"
 import { HeroSection } from "@/components/hero-section"
 import { AvatarOverlay } from "@/components/avatar-overlay"
 import { PortfolioSection } from "@/components/portfolio-section"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Footer } from "@/components/footer"
-
-const SiteSplineBackground = dynamic(() => import("@/components/site-spline-background"), {
-  ssr: false,
-})
 
 type Phase = "waiting" | "playing" | "done"
 
@@ -95,10 +91,10 @@ export default function Page() {
 
   return (
     <>
-      <div className="pointer-events-none fixed inset-0 z-0 bg-background" aria-hidden />
+      {/* Body already provides bg-background; Spline sits above it once loaded */}
       <SiteSplineBackground />
       <div
-        className="pointer-events-none fixed inset-0 z-[1] bg-background/25"
+        className="pointer-events-none fixed inset-0 z-[1] bg-background/15"
         aria-hidden
       />
       <NeuralParticles />
@@ -122,7 +118,7 @@ export default function Page() {
 
           <div
             ref={portfolioRef}
-            className="relative h-full w-screen shrink-0 overflow-x-hidden overflow-y-auto bg-background"
+            className="relative h-full w-screen shrink-0 overflow-x-hidden overflow-y-auto bg-background/80 backdrop-blur-md"
           >
             <PortfolioSection isRevealed={hasPlayedOnce} />
             <Footer />

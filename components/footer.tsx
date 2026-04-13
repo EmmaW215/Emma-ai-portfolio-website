@@ -27,7 +27,9 @@ export function Footer() {
               <Github className="w-4 h-4" />
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/in/xu-emma-wang/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="p-2.5 rounded-lg border border-border/50 text-muted-foreground hover:text-accent hover:border-accent/30 transition-all"
               aria-label="LinkedIn profile"
             >
