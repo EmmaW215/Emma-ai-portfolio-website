@@ -72,7 +72,7 @@ export function AvatarOverlay({ phase, onVideoCycleEnd }: AvatarOverlayProps) {
           height: "clamp(420px, 58vh, 800px)",
         }}
       >
-        {/* The actual video */}
+        {/* Video: radial mask — tune ellipse / stops in style below */}
         <video
           ref={videoRef}
           src={VIDEO_URL}
@@ -80,33 +80,19 @@ export function AvatarOverlay({ phase, onVideoCycleEnd }: AvatarOverlayProps) {
           playsInline
           preload="auto"
           crossOrigin="anonymous"
-          className="w-full h-full object-cover object-top"
-        />
-
-        {/* Soft edge fades so the avatar blends into the background */}
-        <div
-          className="absolute inset-y-0 left-0 w-32 pointer-events-none"
+          className="h-full w-full object-cover object-top"
           style={{
-            background:
-              "linear-gradient(to right, hsl(var(--background)), transparent)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 72% 64% at 63% 38%, #fff 64%, rgba(255,255,255,0.4) 66%, rgba(255,255,255,0.06) 72%, rgba(255,255,255,0) 100%)",
+            maskImage:
+              "radial-gradient(ellipse 72% 64% at 63% 38%, #fff 64%, rgba(255,255,255,0.4) 66%, rgba(255,255,255,0.06) 72%, rgba(255,255,255,0) 100%)",
+            WebkitMaskSize: "100% 100%",
+            maskSize: "100% 100%",
+            WebkitMaskRepeat: "no-repeat",
+            maskRepeat: "no-repeat",
+            WebkitMaskPosition: "center",
+            maskPosition: "center",
           }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute inset-x-0 top-0 h-28 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(to bottom, hsl(var(--background)), transparent)",
-          }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute inset-x-0 bottom-0 h-28 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(to top, hsl(var(--background)), transparent)",
-          }}
-          aria-hidden="true"
         />
 
         {/* Subtle border glow when playing */}
