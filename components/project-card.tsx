@@ -10,6 +10,7 @@ interface Project {
   description: string
   tags: string[]
   github: string
+  /** When set, a Live Demo button appears in the expanded modal only (never on the grid card). */
   demo?: string
   icon: "cpu" | "layers" | "sparkles"
 }
